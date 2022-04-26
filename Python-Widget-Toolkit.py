@@ -4,6 +4,10 @@ from OpenGL.GLU import *
 import numpy
 from Rectangle import Rectangle
 
+# y = window height - _y
+def mouseFunction(_x, _y):
+    ...
+
 def displayFunction():
     idleFunction()
 
@@ -30,7 +34,9 @@ def main():
     window = glutCreateWindow("")
     glutDisplayFunc(displayFunction)
     glutIdleFunc(idleFunction)
+    glutPassiveMotionFunc(mouseFunction)
     glEnable(GL_LINE_SMOOTH)
     glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE)
     glutMainLoop()
+
 main()
