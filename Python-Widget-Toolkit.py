@@ -4,11 +4,6 @@ from OpenGL.GLU import *
 import numpy
 from Rectangle import Rectangle
 
-def drawRectangle(_x, _y, _width, _height, _radius, _color = (1, 0, 0), _lineWidth = 1):
-    glLineWidth(_lineWidth)
-    glColor3f(_color[0], _color[1], _color[2])
-    drawRect(_x, _y, _width, _height, _radius)
-
 def displayFunction():
     idleFunction()
 
@@ -25,7 +20,6 @@ def idleFunction():
     reinitProjection()
     r1 = Rectangle(150, 350, 200, 200, 10)
     r1.draw()
-    #drawRectangle(150, 350, 200, 200, 10, _lineWidth = 3)
     glutSwapBuffers()
 
 def main():
