@@ -74,3 +74,12 @@ class Rectangle:
             y = k + (_self.radius ** 2 - (x - h) ** 2) ** (1 / 2)
             glVertex2f(x, y)
         glEnd()
+
+    def checkIfCollision(_self, _x, _y):
+        if ((_x >= _self.x) and (_x <= _self.x + _self.width)):
+            if ((_y <= _self.y) and (_y >= _self.y - _self.height)):
+                if ((_x >= _self.x + _self.radius) and (_x <= _self.x + _self.width - _self.radius)):
+                    return True
+                if ((_y <= _self.y - _self.radius) and (_y >= _self.y - _self.height + _self.radius)):
+                    return True
+        return False
