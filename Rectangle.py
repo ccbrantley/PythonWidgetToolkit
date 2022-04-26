@@ -78,8 +78,28 @@ class Rectangle:
     def checkIfCollision(_self, _x, _y):
         if ((_x >= _self.x) and (_x <= _self.x + _self.width)):
             if ((_y <= _self.y) and (_y >= _self.y - _self.height)):
+
+                # Top to bottom rectangle collision check.
                 if ((_x >= _self.x + _self.radius) and (_x <= _self.x + _self.width - _self.radius)):
                     return True
+
+                # Left to right rectangle collision check.
                 if ((_y <= _self.y - _self.radius) and (_y >= _self.y - _self.height + _self.radius)):
+                    return True
+
+                # Top right corner collision check.
+                if (((_self.x + _self.width - _self.radius - _x) ** 2 + (_self.y - _self.radius - _y) ** 2) ** (1 / 2) <= _self.radius):
+                    return True
+
+                # Bottom right corner collision check.
+                if (((_self.x + _self.width - _self.radius - _x) ** 2 + (_self.y - _self.height + _self.radius - _y) ** 2) ** (1 / 2) <= _self.radius):
+                    return True
+
+                # Bottom left corner collision check.
+                if (((_self.x + _self.radius - _x) ** 2 + (_self.y - _self.height + _self.radius - _y) ** 2) ** (1 / 2) <= _self.radius):
+                    return True
+
+                # Top left corner collision check.
+                if (((_self.x + _self.radius - _x) ** 2 + (_self.y - _self.radius - _y) ** 2) ** (1 / 2) <= _self.radius):
                     return True
         return False
