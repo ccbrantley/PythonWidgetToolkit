@@ -13,4 +13,5 @@ class Controller:
 
     def idleFunction(_self):
         r1 = Rectangle(150, 350, 200, 200, 10)
-        r1.draw()
+        r1.drawFill()
+        r1.drawOutline(_color = (0, 0, 1, 1), _lineWidth = 5)
