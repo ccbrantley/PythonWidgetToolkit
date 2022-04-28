@@ -1,0 +1,4 @@
+# Editable install with no version control (myproject==1.0)
+-e /root/Documents/Coding/Python/PWT
+numpy==1.22.3
+PyOpenGL==3.1.6
