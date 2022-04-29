@@ -12,11 +12,12 @@ class Circle:
         _self.radius = _radius
 
     def drawFill(_self, _color = (1, 0, 0, 1), _divisions = 5):
+
         glColor4f(_color[0], _color[1], _color[2], _color[3])
 
         increment = 3.14159
         glBegin(GL_TRIANGLES)
-        for x in range(_divisions * int(_self.radius / 180)):
+        for x in range(_divisions * (int(_self.radius / 180) + 1)):
             for inc in numpy.arange(0, 360, increment):
 
                 # Rightmost point.
