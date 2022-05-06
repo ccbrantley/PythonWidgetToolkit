@@ -20,43 +20,42 @@ class RoundedRectangle:
         glVertex2f(_self.x2 + 1, _self.y1 + _self.cornerRadius)
         glVertex2f(_self.x2 + 1, _self.y2 + 1 - _self.cornerRadius)
         glEnd()
-        # Top left and right corners.
+        # Top left corner.
+        topLeftY = []
         h = _self.x1 + _self.cornerRadius
         k = _self.y2 - _self.cornerRadius
-        glBegin(GL_LINES)
-        for x1, x2 in zip(
-            range(_self.x1 + 1, _self.x1 + _self.cornerRadius),
-            range(_self.x2 - 1, _self.x2 - _self.cornerRadius, -1),
+        glBegin(GL_LINE_STRIP)
+        for x in range(_self.x1, _self.x1 + _self.cornerRadius):
+            y = k + (_self.cornerRadius ** 2 - (x - h) ** 2) ** (1 / 2)
+            glVertex2f(x + 1, y)
+            topLeftY.insert(0, y)
+        glEnd()
+        # Top right corner.
+        glBegin(GL_LINE_STRIP)
+        for x, y in zip(
+            range(_self.x2 - _self.cornerRadius, _self.x2),
+            topLeftY,
         ):
-            y1 = k + (_self.cornerRadius ** 2 - (x1 - h) ** 2) ** (1 / 2)
-            # Left corner.
-            glVertex2f(x1 + 1, y1)
-            glVertex2f(x1 + 1, y1 - 1)
-            # Right corner.
-            glVertex2f(x2 + 1, y1)
-            glVertex2f(x2 + 1, y1 - 1)
-        # Bottom left and right corners.
+            glVertex2f(x + 1, y)
+        glEnd()
+        # Bottom left corner.
+        bottomLeftY = []
         h = _self.x1 + _self.cornerRadius
         k = _self.y1 + _self.cornerRadius
-        for x1, x2 in zip(
-            range(_self.x1 + 1, _self.x1 + _self.cornerRadius),
-            range(_self.x2 - 1, _self.x2 - _self.cornerRadius, -1),
-        ):
-            y1 = k - (_self.cornerRadius ** 2 - (x1 - h) ** 2) ** (1 / 2)
-            # Left corner.
-            glVertex2f(x1 + 1, y1 + 2)
-            glVertex2f(x1 + 1, y1 + 1)
-            # Right corner.
-            glVertex2f(x2 + 1, y1 + 2)
-            glVertex2f(x2 + 1, y1 + 1)
+        glBegin(GL_LINE_STRIP)
+        for x in range(_self.x1, _self.x1 + _self.cornerRadius):
+            y = k - (_self.cornerRadius ** 2 - (x - h) ** 2) ** (1 / 2)
+            glVertex2f(x + 1, y + 1)
+            bottomLeftY.insert(0, y)
         glEnd()
-        if ((_self.height / 2 - _self.cornerRadius) <= 2):
-            glBegin(GL_POINTS)
-            glVertex2f(_self.x1 + 1, _self.y2 - _self.cornerRadius + 1)
-            glVertex2f(_self.x1 + 1, _self.y1 + _self.cornerRadius - 1)
-            glVertex2f(_self.x2 - 1, _self.y2 - _self.cornerRadius + 1)
-            glVertex2f(_self.x2 - 1, _self.y1 + _self.cornerRadius - 1)
-            glEnd()
+        # Bottom right corner.
+        glBegin(GL_LINE_STRIP)
+        for x, y in zip(
+            range(_self.x2 - _self.cornerRadius, _self.x2),
+            bottomLeftY,
+        ):
+            glVertex2f(x + 1, y + 1)
+        glEnd()
 
     def drawFill(_self):
         glColor4f(_self.fillColor[0], _self.fillColor[1], _self.fillColor[2], _self.fillColor[3])
