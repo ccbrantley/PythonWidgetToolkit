@@ -138,10 +138,10 @@ class RoundedRectangle:
         glEnd()
 
     def __init__(_self, _x1, _x2, _y1, _y2, _fillColor = (1, 0, 0, 1), _outlineColor = (0, 0, 1, 1), _cornerRadius = 0):
-        _self.x1 = _x1
-        _self.x2 = _x2
-        _self.y1 = _y1
-        _self.y2 = _y2
+        _self.x1 = _x1 if (_x1 <= _x2) else _x2
+        _self.x2 = _x1 if (_x1 > _x2) else _x2
+        _self.y1 = _y1 if (_y1 <= _y2) else _y2
+        _self.y2 = _y1 if (_y1 > _y2) else _y2
         _self.width = abs(_self.x2 - _self.x1) + 1
         _self.height = abs(_self.y2 - _self.y1) + 1
         _self.fillColor = _fillColor
